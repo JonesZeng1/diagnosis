@@ -19,9 +19,23 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  {
+    path: "/diagnosis",
+    name: "Diagnosis",
+    component: () =>
+      import(/* webpackChunkName: "Diagnosis" */ "../views/Diagnosis"),
+  },
+  {
+    path: "/diagnosisConfirm",
+    name: "Diagnosis Confirm",
+    component: () =>
+      import(/* webpackChunkName: "diagnosisConfirm" */ "../components/diagnosis/diagnosisConfirm"),
+  },
 ];
 
 const router = new VueRouter({
+  mode: "history",
+  base: process.env.BASE_URL,
   routes,
 });
 

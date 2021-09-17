@@ -7,10 +7,10 @@
         <h3>Addd symptoms</h3>
     </div>
     <div class="body_symptoms">
-
+        <img src="@/assets/body.png">
     </div>
     <div class="body_symptoms_search_box">
-        <van-search v-model="value" placeholder="Input the symptoms keyword" />
+        <div><p>{{ message }}</p></div>
     </div>
     <div class="next_button">
         <router-link to="/diagnosisProbability"><button class="next">Next</button></router-link>
@@ -28,7 +28,7 @@ export default {
     },
     data() {
         return {
-      value: '',
+      message: '',
     };
   },
     methods: {
@@ -55,18 +55,30 @@ export default {
 .body_symptoms {
     padding: 1em;
     width: 100%;
-    height: 25em;
+    height: 32em;
+}
+
+.body_symptoms img {
+    width: 60%;
+    height: 100%;
+    padding: 1em;
 }
 
 .body_symptoms_search_box {
-    padding: 1em;
-    margin-top: 6em;
+    padding: 2em;
     width: 100%;
+}
+
+.body_symptoms_search_box div{
+    background-color: #e8ecf0;
+    width: 100%;
+    padding: 2em;
+    border-radius: 10px;
+    height: 4em;
 }
 
 /* next button */
 .next_button {
-  margin-top: 2em;
   display: flex;
   flex-direction: column;
   justify-content: center;

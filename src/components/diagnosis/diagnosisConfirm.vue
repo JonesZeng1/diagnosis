@@ -26,7 +26,7 @@
       </van-checkbox-group>
     </div>
     <div class="next_button">
-        <button class="next">Next</button>
+         <router-link to="/diagnosisBody"><button class="next">Next</button></router-link>
     </div>
     
   </div>

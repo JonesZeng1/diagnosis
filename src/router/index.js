@@ -31,6 +31,24 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "diagnosisConfirm" */ "../components/diagnosis/diagnosisConfirm"),
   },
+  {
+    path: "/diagnosisBody",
+    name: "Diagnosis Body",
+    component: () =>
+      import(/* webpackChunkName: "diagnosisBody" */ "../components/diagnosis/diagnosisBody"),
+  },
+  {
+    path: "/diagnosisProbability",
+    name: "diagnosis Probability",
+    component: () =>
+      import(/* webpackChunkName: "diagnosisProbability" */ "../components/diagnosis/diagnosisProbability"),
+  },
+  {
+    path: "/diagnosisResult",
+    name: "diagnosis Probability",
+    component: () =>
+      import(/* webpackChunkName: "diagnosisResult" */ "../components/diagnosis/diagnosisResult"),
+  },
 ];
 
 const router = new VueRouter({

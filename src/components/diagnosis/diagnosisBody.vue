@@ -8,17 +8,10 @@
         <p>We will ask a series of questions to diagnose your symptoms</p>
     </div>
     <div class="body_symptoms">
-        <van-button class="diagnosis-button" type="primary" color="#396CF0">By Body Parts</van-button>
+        <router-link to="diagnosisBodySelect"><van-button class="diagnosis-button" type="primary" color="#396CF0">By Body Parts</van-button></router-link>
         <van-button class="diagnosis-button" type="primary" color="#6A6A6A">By Department</van-button>
     </div>
-    <div class="dropdown-menu">
-        <van-dropdown-menu>
-            <van-dropdown-item v-model="value1" :options="option1" />
-            </van-dropdown-menu>
-    </div>
-    <div class="next_button">
-        <router-link to="/diagnosisProbability"><button class="next">Next</button></router-link>
-    </div>
+
   </div>
 </template>
 
@@ -30,20 +23,7 @@ export default {
     components: {
         GoBack,
     },
-    data() {
-        return {
-            value1: 0,
-            message: '',
-            option1: [
-            { text: 'All body parts', value: 0 },
-            { text: 'head', value: 1 },
-            { text: 'hand', value: 2 },
-      ],
-    };
-  },
-    methods: {
-  },
-}
+ }
 </script>
 
 <style scoped>
@@ -79,7 +59,6 @@ export default {
     padding: 1em;
     width: 100%;
     height: 8em;
-    display: flex;
 }
 
 .diagnosis-button {
@@ -87,9 +66,10 @@ export default {
     margin-top: 1em;
 }
 
+
 /* next button */
 .next_button {
-    margin-top: 20em;
+  margin-top: 8em;
   display: flex;
   flex-direction: column;
   justify-content: center;

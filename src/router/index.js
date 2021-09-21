@@ -38,6 +38,12 @@ const routes = [
       import(/* webpackChunkName: "diagnosisBody" */ "../components/diagnosis/diagnosisBody"),
   },
   {
+  path: "/diagnosisBodySelect",
+  name: "Diagnosis Body Select",
+  component: () =>
+    import(/* webpackChunkName: "diagnosisBodySelect" */ "../components/diagnosis/diagnosisBodySelect"),
+  },
+  {
     path: "/diagnosisProbability",
     name: "diagnosis Probability",
     component: () =>

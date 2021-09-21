@@ -26,7 +26,7 @@
           <div class="statement-select">
             <span class="statement-description">
               <p class="statement-title">I have hypertension</p>
-              <p class="statement-detail"> intensity is better for me</p>
+              <p class="statement-detail">Medium intensity is better for me</p>
             </span>
             <span class="statement-tick"><van-icon class="tick" size="3em" color="white" name="success" /></span>
           </div>

@@ -4,13 +4,17 @@
         <GoBack></GoBack>
     </div>
     <div class="add_symptoms">
-        <h3>Addd symptoms</h3>
+        <h3>Questions</h3>
+        <p>We will ask a series of questions to diagnose your symptoms</p>
     </div>
     <div class="body_symptoms">
-        <img src="@/assets/body.png">
+        <van-button class="diagnosis-button" type="primary" color="#396CF0">By Body Parts</van-button>
+        <van-button class="diagnosis-button" type="primary" color="#6A6A6A">By Department</van-button>
     </div>
-    <div class="body_symptoms_search_box">
-        <div><p>{{ message }}</p></div>
+    <div class="dropdown-menu">
+        <van-dropdown-menu>
+            <van-dropdown-item v-model="value1" :options="option1" />
+            </van-dropdown-menu>
     </div>
     <div class="next_button">
         <router-link to="/diagnosisProbability"><button class="next">Next</button></router-link>
@@ -28,7 +32,13 @@ export default {
     },
     data() {
         return {
-      message: '',
+            value1: 0,
+            message: '',
+            option1: [
+            { text: 'All body parts', value: 0 },
+            { text: 'head', value: 1 },
+            { text: 'hand', value: 2 },
+      ],
     };
   },
     methods: {
@@ -52,33 +62,34 @@ export default {
     padding-top: 2em;
 }
 
+.add_symptoms {
+    padding: 2em;
+}
+
+.add_symptoms p {
+    color: #707070;
+}
+
+.dropdown-menu {
+    padding: 1em;
+    width: 100%;
+}
+
 .body_symptoms {
     padding: 1em;
     width: 100%;
-    height: 32em;
+    height: 8em;
+    display: flex;
 }
 
-.body_symptoms img {
-    width: 60%;
-    height: 100%;
-    padding: 1em;
-}
-
-.body_symptoms_search_box {
-    padding: 2em;
-    width: 100%;
-}
-
-.body_symptoms_search_box div{
-    background-color: #e8ecf0;
-    width: 100%;
-    padding: 2em;
-    border-radius: 10px;
-    height: 4em;
+.diagnosis-button {
+    width: 50%;
+    margin-top: 1em;
 }
 
 /* next button */
 .next_button {
+    margin-top: 20em;
   display: flex;
   flex-direction: column;
   justify-content: center;

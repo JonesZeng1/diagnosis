@@ -7,17 +7,85 @@
         <h3>Questions</h3>
         <p>We will ask a series of questions to diagnose your symptoms</p>
     </div>
-    <div class="body_symptoms">
-        <van-button class="diagnosis-button" type="primary" color="#396CF0">By Body Parts</van-button>
-        <van-button class="diagnosis-button" type="primary" color="#6A6A6A">By Department</van-button>
-    </div>
+
     <div class="dropdown-menu">
-        <van-dropdown-menu>
-          <van-dropdown-item v-model="value1" :options="option1"/>
+        <van-dropdown-menu class="dropdown-menu">
+          <van-dropdown-item v-model.number="value" :options="option" />
         </van-dropdown-menu>
     </div>
-    <div class="related-symtoms" >
-      <div class="related-symtom" v-for="symptom in symptoms" v-bind:key="symptom.id">
+
+    <div v-if="value === 10" class="related-symtoms" id="head">
+      <div class="related-symtom" v-for="symptom in head.symptoms" v-bind:key="symptom.id">
+        <label :for="symptom.name">{{ symptom.name }}</label>
+        <input type="checkbox" v-model="checkedNames" :id="symptom.name" :value="symptom.name">
+      </div>
+    </div>
+
+    <div v-if="value === 1" class="related-symtoms">
+      <div class="related-symtom" v-for="symptom in physiological.symptoms" v-bind:key="symptom.id">
+        <label :for="symptom.name">{{ symptom.name }}</label>
+        <input type="checkbox" v-model="checkedNames" :id="symptom.name" :value="symptom.name">
+      </div>
+    </div>
+
+    <div v-if="value === 2" class="related-symtoms">
+      <div class="related-symtom" v-for="symptom in limbs.symptoms" v-bind:key="symptom.id">
+        <label :for="symptom.name">{{ symptom.name }}</label>
+        <input type="checkbox" v-model="checkedNames" :id="symptom.name" :value="symptom.name">
+      </div>
+    </div>
+
+    <div v-if="value === 3" class="related-symtoms">
+      <div class="related-symtom" v-for="symptom in leg.symptoms" v-bind:key="symptom.id">
+        <label :for="symptom.name">{{ symptom.name }}</label>
+        <input type="checkbox" v-model="checkedNames" :id="symptom.name" :value="symptom.name">
+       </div>
+    </div>
+
+    <div v-if="value === 4" class="related-symtoms">
+      <div class="related-symtom" v-for="symptom in neck.symptoms" v-bind:key="symptom.id">
+        <label :for="symptom.name">{{ symptom.name }}</label>
+        <input type="checkbox" v-model="checkedNames" :id="symptom.name" :value="symptom.name">
+      </div>
+    </div>
+
+    <div v-if="value === 5" class="related-symtoms">
+      <div class="related-symtom" v-for="symptom in abdomen.symptoms" v-bind:key="symptom.id">
+        <label :for="symptom.name">{{ symptom.name }}</label>
+        <input type="checkbox" v-model="checkedNames" :id="symptom.name" :value="symptom.name">
+      </div>
+    </div>
+
+    <div v-if="value === 6" class="related-symtoms">
+      <div class="related-symtom" v-for="symptom in wholeBody.symptoms" v-bind:key="symptom.id">
+        <label :for="symptom.name">{{ symptom.name }}</label>
+        <input type="checkbox" v-model="checkedNames" :id="symptom.name" :value="symptom.name">
+      </div>
+    </div>
+
+    <div v-if="value === 7" class="related-symtoms">
+      <div class="related-symtom" v-for="symptom in buttocks.symptoms" v-bind:key="symptom.id">
+        <label :for="symptom.name">{{ symptom.name }}</label>
+        <input type="checkbox" v-model="checkedNames" :id="symptom.name" :value="symptom.name">
+      </div>
+    </div>
+
+    <div v-if="value === 8" class="related-symtoms">
+      <div class="related-symtom" v-for="symptom in back.symptoms" v-bind:key="symptom.id">
+        <label :for="symptom.name">{{ symptom.name }}</label>
+        <input type="checkbox" v-model="checkedNames" :id="symptom.name" :value="symptom.name">
+      </div>
+    </div>
+
+    <div v-if="value === 9" class="related-symtoms">
+      <div class="related-symtom" v-for="symptom in chest.symptoms" v-bind:key="symptom.id">
+        <label :for="symptom.name">{{ symptom.name }}</label>
+        <input type="checkbox" v-model="checkedNames" :id="symptom.name" :value="symptom.name">
+      </div>
+    </div>
+
+    <div v-if="value === 11" class="related-symtoms">
+      <div class="related-symtom" v-for="symptom in skin.symptoms" v-bind:key="symptom.id">
         <label :for="symptom.name">{{ symptom.name }}</label>
         <input type="checkbox" v-model="checkedNames" :id="symptom.name" :value="symptom.name">
       </div>
@@ -29,7 +97,7 @@
     </div>
     <div class="next_button">
         <p>We recommend adding 3-5 symptoms</p>
-        <router-link to="/diagnosisProbability"><button class="next">Next</button></router-link>
+        <router-link to="/diagnosisProbability"><button class="next">Submit</button></router-link>
     </div>
   </div>
 </template>
@@ -38,24 +106,176 @@
 import GoBack from "@/components/GoBack";
 
 export default {
-    name: "diagnosisBody",
+    name: "diagnosisBodySelect",
     components: {
         GoBack,
     },
     data() {
         return {
-            value1: 0,
+            value: 0,
             message: '',
-            option1: [
-            { text: 'All body parts', value: 0 },
-            { text: 'head', value: 1 },
-            { text: 'hand', value: 2 },
+            option: [
+            { text: 'Select body part', value: 0 },
+            { text: 'physiological', value: 1 },
+            { text: 'limbs', value: 2 },
+            { text: 'leg', value: 3 },
+
+            { text: 'neck', value: 4 },
+            { text: 'abdomen', value: 5 },
+            { text: 'whole body', value: 6 },
+            { text: 'buttocks', value: 7 },
+            { text: 'back', value: 8 },
+
+            { text: 'chest', value: 9 },
+            { text: 'head', value: 10 },
+            { text: 'skin', value: 11 },
       ],
+      checkedNames: [],
+      ishead: true,
+      head: {
       symptoms: [
       { name: 'Headach' },
-      { name: 'Headach2' },
-    ],
-      checkedNames: [],
+      { name: 'acidity' },
+      { name: 'Lethargy' },
+      { name: 'Visual disturbances' },
+      { name: 'Lack of concentration' },
+      { name: 'depression' },
+      { name: 'loss of smell' },
+      { name: 'sunken eyes' },
+      { name: 'rusty sputum' },
+      { name: 'mucoid sputum' },
+      { name: 'watering from eyes' },
+      { name: 'slurred speech' },
+      { name: 'drying and tingling lips' },
+      { name: 'dizziness' },
+      { name: 'yellowing of eyes' },
+      { name: 'pain behind the eyes' },
+      { name: 'cough' },
+      { name: 'ulcers on tongue' },
+      { name: 'toxic look (typhos)' },
+      { name: 'puffy face and eyes' },
+      { name: 'runny nose' },
+      { name: 'blurred and distorted vision' },
+      { name: 'mild fever' },
+      ]
+      },
+
+      chest: {
+      symptoms: [
+      { name: 'chest pain' },
+      { name: 'silver like dusting' },
+      { name: 'blister' },
+      { name: 'palpitations' },
+      { name: 'breathlessness' },
+      { name: 'abnormal menstruation' },
+      { name: 'continuous feel of urine' },
+      { name: 'spotting urination' },
+      { name: 'burning micturition' },
+      ]
+      },
+
+      limbs: {
+      symptoms: [
+      { name: 'weakness in limbs' },
+      { name: 'inflammatory nails' },
+      { name: 'small dents in nails' },
+      { name: 'hip joint pain' },
+      { name: 'knee pain' },
+      { name: 'joint pain' },
+      { name: 'cramps' },
+      { name: 'movement stiffness' },
+      { name: 'swelling joints' },
+      { name: 'swollen extremeties' },
+      { name: 'brittle nails' },
+      { name: 'cold hands and feets' },
+      { name: 'spinning movements' },
+      ]
+      },
+
+      leg: {
+      symptoms: [
+      { name: 'prominent veins on calf' },
+      { name: 'swollen legs' },
+      ]
+      },
+
+      neck: {
+      symptoms: [
+      { name: 'enlarged thyroid' },
+      { name: 'neck pain' },
+      { name: 'patches in throat' },
+      { name: 'swelled lymph nodes' },
+      { name: 'stiff neck' },
+      { name: 'throat irritation' },
+      ]
+      },
+
+      buttocks: {
+      symptoms: [
+      { name: 'constipation' },
+      { name: 'irritation in anus' },
+      { name: 'pain during bowel movements' },
+      { name: 'pain in anal region' },
+      ]
+      },
+
+      back: {
+      symptoms: [
+      { name: 'constipation' },
+      { name: 'back pain' },
+      { name: 'irregular sugar level' },
+      ]
+      },
+
+      physiological: {
+      symptoms: [
+      { name: 'abnormal menstruation' },
+      { name: 'burning micturition' },
+      { name: 'continuous feel of urine' },
+      { name: 'dark urine' },
+      { name: 'foul smell of urine' },
+      { name: 'polyuria' },
+      { name: 'spotting urination' },
+      { name: 'yellow urine' },
+      ]
+      },
+
+      skin: {
+      symptoms: [
+      { name: 'blackheads' },
+      { name: 'dischromic patches' },
+      { name: 'foul smell ofurine' },
+      { name: 'itching' },
+      { name: 'nodal skin eruptions' },
+      { name: 'pus filled pimples' },
+      { name: 'red sore around nose' },
+      { name: 'red spots over body' },
+      { name: 'skin peeling' },
+      { name: 'skin rash' },
+      { name: 'yellow crust ooze' },
+      { name: 'yellowish skin' },
+      ]
+      },
+
+      abdomen: {
+      symptoms: [
+      { name: 'diarrhoea' },
+      { name: 'acute liver failure' },
+      { name: 'stomach bleeding' },
+      { name: 'stomach pain' },
+      { name: 'vomiting' },
+      { name: 'indigestion' },
+      { name: 'nausea' },
+      { name: 'increased appetite' },
+      { name: 'loss of appetite' },
+      { name: 'abdominal pain' },
+      { name: 'excessive hunger' },
+      { name: 'bladder discomfort' },
+      { name: 'belly pain' },
+      { name: 'distention of abdomen' },
+      { name: 'swelling of stomach' },
+      ]
+      },
     };
   },
     methods: {
@@ -90,23 +310,13 @@ export default {
 .dropdown-menu {
     padding: 1em;
     width: 100%;
-}
-
-.body_symptoms {
-    padding: 1em;
-    width: 100%;
-    height: 8em;
-}
-
-.diagnosis-button {
-    width: 50%;
-    margin-top: 1em;
+    border-radius: 10%;
 }
 
 .related-symtoms {
   height: 10em;
-  width: 100%;
-  padding: 2em;
+  max-width: 100%;
+  padding: 1em;
   text-align: left;
   display: flex;
 }
@@ -126,6 +336,7 @@ export default {
 
 .related-symtoms label {
   display: inline-block;
+  font-size: 12px;
 }
 
 .selected-symtoms {

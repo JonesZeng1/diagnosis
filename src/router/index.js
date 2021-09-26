@@ -32,12 +32,6 @@ const routes = [
       import(/* webpackChunkName: "diagnosisConfirm" */ "../components/diagnosis/diagnosisConfirm"),
   },
   {
-    path: "/diagnosisBody",
-    name: "Diagnosis Body",
-    component: () =>
-      import(/* webpackChunkName: "diagnosisBody" */ "../components/diagnosis/diagnosisBody"),
-  },
-  {
   path: "/diagnosisBodySelect",
   name: "Diagnosis Body Select",
   component: () =>
@@ -51,9 +45,15 @@ const routes = [
   },
   {
     path: "/diagnosisResult",
-    name: "diagnosis Probability",
+    name: "diagnosis Result",
     component: () =>
       import(/* webpackChunkName: "diagnosisResult" */ "../components/diagnosis/diagnosisResult"),
+  },
+  {
+    path: "/diagnosisLoading",
+    name: "diagnosis Loading",
+    component: () =>
+      import(/* webpackChunkName: "diagnosisLoading" */ "../components/diagnosis/diagnosisLoading"),
   },
 ];
 

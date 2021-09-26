@@ -56,7 +56,7 @@
     </div>
     
     <div class="next_button">
-         <router-link to="/diagnosisBody"><button class="next">Next</button></router-link>
+         <router-link to="/diagnosisBodySelect"><button class="next">Next</button></router-link>
     </div>
     
   </div>

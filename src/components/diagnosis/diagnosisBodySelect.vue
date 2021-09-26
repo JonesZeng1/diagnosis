@@ -14,6 +14,9 @@
         </van-dropdown-menu>
     </div>
 
+    <div v-if="value === 0" class="related-symtoms" id="head">
+    </div>
+
     <div v-if="value === 10" class="related-symtoms" id="head">
       <div class="related-symtom" v-for="symptom in head.symptoms" v-bind:key="symptom.id">
         <label :for="symptom.name">{{ symptom.name }}</label>
@@ -97,7 +100,16 @@
     </div>
     <div class="next_button">
         <p>We recommend adding 3-5 symptoms</p>
-        <router-link to="/diagnosisProbability"><button class="next">Submit</button></router-link>
+        <button  @click="finish" class="next">Finish</button>
+          <van-popup position="bottom" round v-model="show" :style="{ height: '40%' }">
+            <div class="selected-popup">
+              <h3>Selected symptoms</h3>
+              <span>{{ checkedNames }}</span>
+            </div>
+            <div class="next_button">
+              <router-link to="/diagnosisLoading"><button class="next">Submit</button></router-link>
+            </div>
+          </van-popup>
     </div>
   </div>
 </template>
@@ -112,6 +124,7 @@ export default {
     },
     data() {
         return {
+            show: false,
             value: 0,
             message: '',
             option: [
@@ -279,6 +292,15 @@ export default {
     };
   },
     methods: {
+        showPopup() {
+      this.show = true;
+    },
+    finish() {
+      this.$store.state.checkedNames = this.$data.checkedNames;
+      let checkedNames = this.$data.checkedNames;
+      let result = JSON.stringify({list: checkedNames})
+      console.log(result)
+    }
   },
  }
 </script>
@@ -319,6 +341,7 @@ export default {
   padding: 1em;
   text-align: left;
   display: flex;
+  overflow: auto;
 }
 
 .related-symtom {
@@ -326,7 +349,6 @@ export default {
   width: 6em;
   margin-left: 1em;
   border-radius: 10%;
-  background-color: #F4F5F6;
   text-align: center;
 }
 
@@ -337,12 +359,22 @@ export default {
 .related-symtoms label {
   display: inline-block;
   font-size: 12px;
+  padding: 1em;
+  background-color: #F4F5F6;
 }
 
 .selected-symtoms {
   padding: 1em;
   width: 100%;
   height: 2em;
+}
+
+.selected-popup {
+  padding: 1em;
+}
+
+.selected-popup span {
+  padding-top: 2em;
 }
 
 /* next button */

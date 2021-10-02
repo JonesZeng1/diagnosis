@@ -60,7 +60,7 @@
     </div>
 
     <div v-if="value === 6" class="related-symtoms">
-      <div class="related-symtom" v-for="symptom in wholeBody.symptoms" v-bind:key="symptom.id">
+      <div class="related-symtom" v-for="symptom in wholebody.symptoms" v-bind:key="symptom.id">
         <label :for="symptom.name">{{ symptom.name }}</label>
         <input type="checkbox" v-model="checkedNames" :id="symptom.name" :value="symptom.name">
       </div>
@@ -100,14 +100,14 @@
     </div>
     <div class="next_button">
         <p>We recommend adding 3-5 symptoms</p>
-        <button  @click="finish" class="next">Finish</button>
+        <button  @click="showPopup" class="next">Finish</button>
           <van-popup position="bottom" round v-model="show" :style="{ height: '40%' }">
             <div class="selected-popup">
               <h3>Selected symptoms</h3>
               <span>{{ checkedNames }}</span>
             </div>
             <div class="next_button">
-              <router-link to="/diagnosisLoading"><button class="next">Submit</button></router-link>
+              <router-link to="/diagnosisLoading"><button @click="created" class="next">Submit</button></router-link>
             </div>
           </van-popup>
     </div>
@@ -116,6 +116,7 @@
 
 <script>
 import GoBack from "@/components/GoBack";
+import axios from "axios";
 
 export default {
     name: "diagnosisBodySelect",
@@ -147,11 +148,11 @@ export default {
       ishead: true,
       head: {
       symptoms: [
-      { name: 'Headach' },
+      { name: 'headach' },
       { name: 'acidity' },
-      { name: 'Lethargy' },
-      { name: 'Visual disturbances' },
-      { name: 'Lack of concentration' },
+      { name: 'lethargy' },
+      { name: 'visual disturbances' },
+      { name: 'lack of concentration' },
       { name: 'depression' },
       { name: 'loss of smell' },
       { name: 'sunken eyes' },
@@ -165,7 +166,7 @@ export default {
       { name: 'pain behind the eyes' },
       { name: 'cough' },
       { name: 'ulcers on tongue' },
-      { name: 'toxic look (typhos)' },
+      { name: 'toxic look' },
       { name: 'puffy face and eyes' },
       { name: 'runny nose' },
       { name: 'blurred and distorted vision' },
@@ -289,19 +290,59 @@ export default {
       { name: 'swelling of stomach' },
       ]
       },
+
+      wholebody: {
+      symptoms: [
+      { name: 'altered sensorium' },
+      { name: 'chills' },
+      { name: 'coma' },
+      { name: 'dehydration' },
+      { name: 'fatigue' },
+      { name: 'fluid overload' },
+      { name: 'history of alcohol consumption' },
+      { name: 'internal itching' },
+      { name: 'irritability' },
+      { name: 'loss of balance' },
+      { name: 'malaise' },
+      { name: 'mood swings' },
+      { name: 'muscle pain' },
+      { name: 'muscle wasting' },
+      { name: 'muscle weakness' },
+      { name: 'obesity' },
+      { name: 'painful walking' },
+      { name: 'prognosis' },
+      { name: 'receiving blood transfusion' },
+      { name: 'receiving unsterile injections' },
+      { name: 'restlessness' },
+      { name: 'scurring' },
+      { name: 'shivering' },
+      { name: 'sinus pressure' },
+      { name: 'sweating' },
+      { name: 'swollen blood vessels' },
+      { name: 'unsteadiness' },
+      { name: 'weight loss' },
+      ]
+      },
     };
   },
     methods: {
-        showPopup() {
+      showPopup() {
       this.show = true;
+
     },
-    finish() {
+      created() {
+      setTimeout( () => this.$router.push({ path: '/diagnosisResult'}), 10000);
       this.$store.state.checkedNames = this.$data.checkedNames;
       let checkedNames = this.$data.checkedNames;
-      let result = JSON.stringify({list: checkedNames})
+      let result = JSON.stringify({symptoms: checkedNames});
       console.log(result)
+      axios({
+        method: "post",
+        url: "http://deco.logfox.xyz/servlet_project/diagnosisServlet",
+        data: result,
+      });
     }
-  },
+  }
  }
 </script>
 

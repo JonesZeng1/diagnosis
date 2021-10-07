@@ -8,56 +8,33 @@
                 <h3>Result</h3>
                 <p>Here are the results of your diagnosis of the above symptoms, ranked from highest to lowest probability.</p>
             </div>
-            <div class="ill_probability">
-                <div class="ill_section">
+            <div class="ill_probability" id="value-result">
+                <div v-for="result in diagnosisResult" :key="result.diseaseName" class="ill_section">
                     <div class="ill_title">
-                        <h3>Cerebral hemorrhage</h3>
+                        <h3>{{ result.diseaseName }}</h3>                
                         <van-icon @click="showPopup" class="more_detail" name="ellipsis" />
                         <van-popup position="bottom" round v-model="show" :style="{ height: '80%' }">
                             <div class="popUp_title">
-                                <h3>Cerebral hemorrhage</h3>
+                                <h3>{{ result.diseaseName }}</h3>
                                 <div class="evidence">
-                                <h6>Strong evdience</h6>
-                                <van-progress :percentage="90" stroke-width="8" />
+                                <h6>Probability</h6>
+                                <van-progress :percentage="result.probability" stroke-width="8" />
+                                <div class="pop-up-recommendation-department">
+                                    <h3>Recommend department:</h3>
+                                    <div>{{ result.department }}</div>
+                                </div>
+                                
+                                <div class="pop-up-description">
+                                    <h3>Disease description:</h3>
+                                    <p>{{ result.diseaseDescription }}</p>
+                                </div>
+                                
                             </div>
                             </div>
-                            
-                            <div class="popup_symptom">
-                                <h3>Cerebral haemorrhage symptom:</h3>
-                                <div>
-                                    <p>Fever</p>
-                                    <van-icon class="tick" size="1em" color="blue" name="success" />
-                                </div>
-                                <div>
-                                    <p>Diagnosed diabetes</p>
-                                    <van-icon class="tick" color="blue" name="success" />
-                                </div>
-                                <div>
-                                    <p><van-icon name="ellipsis" /></p>
-                                    <van-icon class="cross" color="red" name="cross" />
-                                </div>
-                                <div>
-                                    <p><van-icon name="ellipsis" /></p>
-                                    <van-icon class="cross" color="red" name="cross" />
-                                </div>
-                            </div>
+
                         </van-popup>
                     </div>
-                    <van-progress :percentage="80" stroke-width="8" />
-                </div>
-                <div class="ill_section">
-                    <div class="ill_title">
-                        <h3>Cold</h3>
-                        <van-icon @click="showPopup" class="more_detail" name="ellipsis" />
-                    </div>
-                    <van-progress :percentage="40" stroke-width="8" />
-                </div>
-                <div class="ill_section">
-                    <div class="ill_title">
-                        <h3>Increased intracranial pressure</h3>
-                        <van-icon @click="showPopup" class="more_detail" name="ellipsis" />
-                    </div>
-                    <van-progress :percentage="15" stroke-width="8" />
+                    <van-progress :percentage="result.probability" stroke-width="8" />
                 </div>
             </div>
         </div>
@@ -67,7 +44,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 import GoBack from "@/components/GoBack";
 
 export default {
@@ -78,8 +55,13 @@ export default {
     data() {
         return {
       show: false,
+      diagnosisResult: [],
     };
+    
   },
+    created: function () {
+        this.diagnosisResult = this.$store.getters.getDisgnosisResult.diagnosisResult.data;
+    },
     methods: {
         showPopup() {
       this.show = true;
@@ -167,24 +149,7 @@ export default {
     margin-bottom: 1em;
 }
 
-.popup_symptom {
-    padding: 2em;
-}
-
-.popup_symptom div {
-    display: flex;
-    height: 3em;
-    width: 100%;
-}
-
-.popup_symptom p {
-    width: 80%;
-    font-size: 1em;
-}
-
-.tick, .cross {
-    width: 20%;
-    text-align: center;
-    margin-top: 10px;
+.pop-up-recommendation-department, .pop-up-description {
+    padding-top: 2em;
 }
 </style>

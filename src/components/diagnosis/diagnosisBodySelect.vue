@@ -335,11 +335,15 @@ export default {
       this.$store.state.checkedNames = this.$data.checkedNames;
       let checkedNames = this.$data.checkedNames;
       let result = JSON.stringify({symptoms: checkedNames});
-      console.log(result)
+      console.log(result);
       axios({
         method: "post",
         url: "http://deco.logfox.xyz/servlet_project/diagnosisServlet",
         data: result,
+        }).then((e) => {
+          this.$store.state.disease = e;
+          let test = this.$store.getters.getDisgnosisResult;
+          console.log(test);
       });
     }
   }

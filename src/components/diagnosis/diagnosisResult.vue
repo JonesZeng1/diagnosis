@@ -9,11 +9,11 @@
                 <p>Here are the results of your diagnosis of the above symptoms, ranked from highest to lowest probability.</p>
             </div>
             <div class="ill_probability" id="value-result">
-                <div v-for="result in diagnosisResult" :key="result.diseaseName" class="ill_section">
+                <div v-for="(result, index) in diagnosisResult" :key="index" class="ill_section">
                     <div class="ill_title">
-                        <h3>{{ result.diseaseName }}</h3>                
-                        <van-icon @click="showPopup" class="more_detail" name="ellipsis" />
-                        <van-popup position="bottom" round v-model="show" :style="{ height: '80%' }">
+                        <h3>{{ result.diseaseName }}</h3>              
+                        <van-icon @click="showPopup(index)" class="more_detail" name="ellipsis" :data-index="index" />
+                        <van-popup position="bottom" round v-model="show" :style="{ height: '80%' }" v-if= "index === resultIndex">
                             <div class="popUp_title">
                                 <h3>{{ result.diseaseName }}</h3>
                                 <div class="evidence">
@@ -29,7 +29,7 @@
                                     <p>{{ result.diseaseDescription }}</p>
                                 </div>
                                 
-                            </div>
+                                </div>
                             </div>
 
                         </van-popup>
@@ -56,14 +56,18 @@ export default {
         return {
       show: false,
       diagnosisResult: [],
+      diagnosisID: [],
+      resultIndex: "",
     };
     
   },
     created: function () {
         this.diagnosisResult = this.$store.getters.getDisgnosisResult.diagnosisResult.data;
+        
     },
     methods: {
-        showPopup() {
+        showPopup(e) {
+        this.resultIndex = e;
         this.show = true;
     },
         backToHome() {
@@ -103,6 +107,7 @@ export default {
 .ill_probability {
     margin-top: 3em;
     height: 25em;
+    overflow: scroll;
 }
 
 .ill_section {

@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="next_button">
-            <router-link to="/"><button class="next">Back to home</button></router-link>
+            <div @click="backToHome" class="next">Back to home</div>
         </div>
   </div>
 </template>
@@ -64,8 +64,11 @@ export default {
     },
     methods: {
         showPopup() {
-      this.show = true;
+        this.show = true;
     },
+        backToHome() {
+            window.location.href = 'http://deco.logfox.xyz/servlet_project/jumperServlet?target=home.html';
+        }
   },
 }
 </script>

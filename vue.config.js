@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: 'diagnosis',
-};
+    publicPath: "diagnosis",
+  };

@@ -148,7 +148,7 @@ export default {
       ishead: true,
       head: {
       symptoms: [
-      { name: 'headach' },
+      { name: 'headache' },
       { name: 'acidity' },
       { name: 'lethargy' },
       { name: 'visual disturbances' },
